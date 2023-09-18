@@ -33,6 +33,8 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    enum class Operation
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -121,6 +123,6 @@ fun PrintOnScreen(name: String, color: MainActivity.Colors, modifier: Modifier =
     Text(
         text = "Hello ${name.uppercase()}",
         modifier = Modifier,
-        color = color.WithAlpha(0.1f)
+        color = color.WithAlpha(1.0f)
     )
 }
