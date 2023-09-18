@@ -1,6 +1,7 @@
 package com.example.apuntesclase
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,7 +20,7 @@ class MainActivity : ComponentActivity() {
             ApuntesClaseTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    Greeting("Android")
+                    PrintOnScreen("dennys👽", "🦇")
                 }
             }
         }
@@ -27,17 +28,34 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-            text = "Hello $name!",
-            modifier = modifier
-    )
-}
+fun PrintOnScreen(name: String?, name2: String?, modifier: Modifier = Modifier) {
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ApuntesClaseTheme {
-        Greeting("Android")
+    /*val name = name?.let{
+        val name2 = name2?.let {
+            Text(
+                text = "Hello ${name.uppercase()} ${name.uppercase()}",
+                modifier = modifier
+            )
+        } ?: run {
+            Log.e("Null", "Name2 is null")
+        }?: run {
+            Log.e("Null", "Name is null")
+        }*/
+
+    /*var NewName: String? = "hola"
+    NewName = "Dylan"
+
+    val name = name ?: run {
+        Log.e("Null", "Name is null")
+        return
     }
+
+    val name2 = name2 ?: run {
+        Log.e("Null", "Name is null")
+        return
+
+    Text(
+        text = "Hello ${name.uppercase()} ${name2.uppercase()}",
+        modifier = modifier
+    )*/
 }
