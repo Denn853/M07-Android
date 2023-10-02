@@ -53,6 +53,26 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    enum class Animals(){
+        Dog, Cat, Panda, Fox
+    }
+
+    open class Fruit(val name: String = "FrutaGenerica") {
+
+    }
+
+    class Apple() : Fruit ("Manzana") {
+        fun AppleFunc() {
+
+        }
+    }
+
+    class Banana() : Fruit ("Banana") {
+        fun BananaFunc() {
+
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -97,7 +117,7 @@ class MainActivity : ComponentActivity() {
                             PrintOnScreen(name + " " + index.toString())
                         }*/
 
-                        /*Enums*/
+                        /*Enums
                         PrintOnScreen(name = "Algo de color", color = Colors.Green)
 
                         //Sumar
@@ -117,7 +137,56 @@ class MainActivity : ComponentActivity() {
                         }
 
                         //Llamada a la función
-                        MyButton.Click()
+                        MyButton.Click()*/
+
+                        /*When(Switch)*/
+                        var animal = Animals.Fox
+
+                        when (animal) {
+                            Animals.Dog -> PrintOnScreen(name = "Es un perro")
+                            Animals.Cat -> PrintOnScreen(name = "Es un gato")
+                            Animals.Panda -> PrintOnScreen(name = "Es un panda")
+                            Animals.Fox -> PrintOnScreen(name = "Es un zorro")
+                        }
+
+                        var fruit: Fruit? = Banana()
+
+                        when(fruit) {
+                            is Banana -> {
+                                fruit.BananaFunc()
+                                PrintOnScreen(name = "Es una Banana")
+                            }
+
+                            is Apple -> {
+                                fruit.AppleFunc()
+                                PrintOnScreen(name = "Es una Manzana")
+                            }
+
+                            else -> {
+                                PrintOnScreen(name = "Es Null")
+                            }
+                        }
+
+                        val str = "Lunes"
+
+                        when(str) {
+                            "Lunes" -> PrintOnScreen(name = "Es Lunes")
+                            "Martes" -> PrintOnScreen(name = "Es Martes")
+                            "Miercoles" -> PrintOnScreen(name = "Es Miercoles")
+
+                            else -> PrintOnScreen(name = "No se que dia es")
+                        }
+
+
+                        val numberDay = when(str) {
+                            "Lunes" -> 0
+                            "Martes" -> 1
+                            "Miercoles" -> 2
+
+                            else -> -1
+                        }
+                        
+                        PrintOnScreen(name = numberDay.toString())
 
                     }
                 }
@@ -127,7 +196,8 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun PrintOnScreen(name: String, color: MainActivity.Colors, modifier: Modifier = Modifier) {
+//fun PrintOnScreen(name: String, color: MainActivity.Colors, modifier: Modifier = Modifier) {
+fun PrintOnScreen(name: String, modifier: Modifier = Modifier) {
 
     /*val name = name?.let{
         val name2 = name2?.let {
@@ -161,6 +231,6 @@ fun PrintOnScreen(name: String, color: MainActivity.Colors, modifier: Modifier =
     Text(
         text = "Hello ${name.uppercase()}",
         modifier = Modifier,
-        color = color.WithAlpha(1.0f)
+        //color = color.WithAlpha(1.0f)
     )
 }
