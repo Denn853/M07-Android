@@ -33,7 +33,10 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    enum class Operation
+    enum class Operations(val operation: (Int, Int) -> Int) {
+        Add({a, b -> a + b}),
+        Subtract({a, b -> a - b});
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,6 +84,16 @@ class MainActivity : ComponentActivity() {
 
                         /*Enums*/
                         PrintOnScreen(name = "Algo de color", color = Colors.Green)
+
+                        //Sumar
+                        var mathFunction: Operations = Operations.Add
+
+                        //Restar
+                        //var mathFunction: Operations = Operations.Subtract
+                        var result = mathFunction.operation(1, 5)
+
+                        PrintOnScreen(name = result.toString(), color = Colors.Blue)
+
                     }
                 }
             }
