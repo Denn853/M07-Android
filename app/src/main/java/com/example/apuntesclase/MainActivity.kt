@@ -3,7 +3,9 @@ package com.example.apuntesclase
 import android.os.Bundle
 import android.os.CpuUsageInfo
 import android.util.Log
+import android.widget.Button
 import android.widget.Space
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
@@ -23,6 +25,7 @@ import com.example.apuntesclase.ui.theme.ApuntesClaseTheme
 
 class MainActivity : ComponentActivity() {
 
+    /* Colors
     enum class Colors(val text: String, val number: Int, val color: Color) {
         Red("Rojo", 0, Color(225, 0,0)),
         Blue("Azul", 1, Color(0,0,255)),
@@ -31,8 +34,9 @@ class MainActivity : ComponentActivity() {
         fun WithAlpha(alpha: Float) : Color {
             return this.color.copy(alpha = alpha)
         }
-    }
+    }*/
 
+    /* Maths and Button
     enum class Operations(val operation: (Int, Int) -> Int) {
         Add({a, b -> a + b}),
         Subtract({a, b -> a - b});
@@ -51,8 +55,9 @@ class MainActivity : ComponentActivity() {
                 listener(this);
             }
         }
-    }
+    } */
 
+    /* Enums and Switches
     enum class Animals(){
         Dog, Cat, Panda, Fox
     }
@@ -71,11 +76,24 @@ class MainActivity : ComponentActivity() {
         fun BananaFunc() {
 
         }
+    }*/
+
+    /*UI*/
+    var counter:Int = 0
+    val textView:TextView by lazy { findViewById(R.id.startScreen_HelloWorldText) }
+    val button by lazy {
+        val bt = findViewById<Button>(R.id.startScreen_HelloWorldButton)
+
+        bt.setOnClickListener {
+            counter++
+            textView.text = counter.toString()
+        }
+        return@lazy bt
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
+        /*setContent {
             ApuntesClaseTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
@@ -139,7 +157,7 @@ class MainActivity : ComponentActivity() {
                         //Llamada a la función
                         MyButton.Click()*/
 
-                        /*When(Switch)*/
+                        /*When(Switch)
                         var animal = Animals.Fox
 
                         when (animal) {
@@ -186,16 +204,23 @@ class MainActivity : ComponentActivity() {
                             else -> -1
                         }
                         
-                        PrintOnScreen(name = numberDay.toString())
-
+                        PrintOnScreen(name = numberDay.toString())*/
                     }
                 }
             }
-        }
+        }*/
+        setContentView(R.layout.start_screen)
+
+        button
     }
+
+    fun resetTextAndCounter() {
+
+    }
+
 }
 
-@Composable
+/* @Composable
 //fun PrintOnScreen(name: String, color: MainActivity.Colors, modifier: Modifier = Modifier) {
 fun PrintOnScreen(name: String, modifier: Modifier = Modifier) {
 
@@ -233,4 +258,4 @@ fun PrintOnScreen(name: String, modifier: Modifier = Modifier) {
         modifier = Modifier,
         //color = color.WithAlpha(1.0f)
     )
-}
+}*/
