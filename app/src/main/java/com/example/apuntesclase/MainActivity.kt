@@ -1,9 +1,14 @@
 package com.example.apuntesclase
 
+import android.app.ActionBar.LayoutParams
+import android.content.Context
 import android.os.Bundle
 import android.os.CpuUsageInfo
 import android.util.Log
+import android.view.ViewGroup
+import android.view.ViewParent
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.Space
 import android.widget.TextView
 import androidx.activity.ComponentActivity
@@ -79,17 +84,58 @@ class MainActivity : ComponentActivity() {
     }*/
 
     /*UI*/
-    var counter:Int = 0
-    val textView:TextView by lazy { findViewById(R.id.startScreen_HelloWorldText) }
-    val button by lazy {
-        val bt = findViewById<Button>(R.id.startScreen_HelloWorldButton)
+    class ButtonsRow(var linearLayout: LinearLayout, val context: Context) {
+        var buttons: MutableList<Button> = mutableListOf()
 
-        bt.setOnClickListener {
-            counter++
-            textView.text = counter.toString()
+        fun AddButtonToRow(text: String) : Button {
+            var bt = Button(context)
+            bt.text = text
+
+            bt.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT, 1.0f)
+
+            linearLayout.addView(bt)
+            buttons.add(bt)
+
+            return bt
         }
-        return@lazy bt
     }
+
+    class ButtonsGrid(var parent: LinearLayout, val context: Context) {
+
+        val baseLinearLayout: LinearLayout
+        private var rows: MutableList<ButtonsRow> = mutableListOf()
+
+        init {
+            baseLinearLayout = LinearLayout(context)
+            baseLinearLayout.orientation = LinearLayout.VERTICAL
+
+            parent.addView(baseLinearLayout)
+        }
+
+        fun AddNewRow() {
+            val linearLayout = LinearLayout(context)
+            linearLayout.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT, 1.0f)
+
+            baseLinearLayout.addView(linearLayout)
+            rows.add(ButtonsRow(linearLayout, context))
+        }
+
+        fun GetRow(index: Int) : ButtonsRow? {
+
+            if(index >= rows.count() || index < 0) {
+                return null
+            }
+
+            return rows[index]
+        }
+    }
+
+    val result: TextView by lazy { findViewById(R.id.startScreen_Result) }
+    val buttonsContainer: LinearLayout by lazy { findViewById(R.id.startScreen_ButtonsContainer) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -211,14 +257,50 @@ class MainActivity : ComponentActivity() {
         }*/
         setContentView(R.layout.start_screen)
 
-        button
-    }
+        /*val bt = Button(this)
+        bt.text = "Botón creado por código"
+        bt.layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )*/
 
+        //buttonsContainer.addView(bt)
+
+        val btGrid = ButtonsGrid(buttonsContainer, this)
+
+        /*btGrid.AddNewRow()
+
+        btGrid.GetRow(1)?.AddButtonToRow("1")?.setOnClickListener { result.text = "1" }
+        btGrid.GetRow(1)?.AddButtonToRow("2")?.setOnClickListener { result.text = "2" }
+        btGrid.GetRow(1)?.AddButtonToRow("3")?.setOnClickListener { result.text = "3" }
+        btGrid.GetRow(1)?.AddButtonToRow("+")?.setOnClickListener { result.text = "+" }*/
+
+        var names: MutableList<MutableList<String>> = mutableListOf()
+        names.add(mutableListOf("AC", "( )", "%", "/"))
+        names.add(mutableListOf("7", "8", "9", "x"))
+        names.add(mutableListOf("4", "5", "6", "-"))
+        names.add(mutableListOf("1", "2", "3", "+"))
+        names.add(mutableListOf("0", ".", "DEL", "="))
+
+        for (y in names.indices) {
+            btGrid.AddNewRow()
+            var row: ButtonsRow? = btGrid.GetRow(y)
+
+            for (x in names[y].indices) {
+                row?.AddButtonToRow(names[y][x])?.setOnClickListener{
+                    when(names[y][x]) {
+                        else -> result.text = names[y][x]
+                    }
+                }
+            }
+
+        }
+
+    }
+}
     fun resetTextAndCounter() {
 
     }
-
-}
 
 /* @Composable
 //fun PrintOnScreen(name: String, color: MainActivity.Colors, modifier: Modifier = Modifier) {
