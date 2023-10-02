@@ -38,6 +38,21 @@ class MainActivity : ComponentActivity() {
         Subtract({a, b -> a - b});
     }
 
+    class Bt() { //Button
+
+        var listeners: MutableList<(Bt) -> Unit> = mutableListOf()
+
+        fun AddOnClickListener(OnClickListener: (Bt) -> Unit) {
+            listeners.add(OnClickListener)
+        }
+
+        fun Click() {
+            for (listener in listeners) {
+                listener(this);
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -93,6 +108,16 @@ class MainActivity : ComponentActivity() {
                         var result = mathFunction.operation(1, 5)
 
                         PrintOnScreen(name = result.toString(), color = Colors.Blue)
+
+                        //Boton
+                        val MyButton = Bt()
+
+                        MyButton.AddOnClickListener {bt ->
+                            Log.v("Click", "Botón Pulsado")
+                        }
+
+                        //Llamada a la función
+                        MyButton.Click()
 
                     }
                 }
