@@ -2,9 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center">
 
+    <TextView
+        android:id="@+id/open_app_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/padding_low"
+        />
 
+<!-- CALCULADORA
     <TextView
         android:id="@+id/startScreen_Result"
         android:layout_width="match_parent"
@@ -32,7 +40,7 @@
 
 </LinearLayout>
 
-    <!--
+
             <Button
                 android:id="@+id/startScreen_HelloWorldButton"
                 android:layout_width="match_parent"
@@ -262,5 +270,6 @@
                 android:layout_weight="1"
                 android:text="="
                 />
-        </LinearLayout>
-    -->
+                    -->
+
+</LinearLayout>

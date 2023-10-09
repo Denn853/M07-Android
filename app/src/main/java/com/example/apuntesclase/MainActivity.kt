@@ -2,6 +2,7 @@ package com.example.apuntesclase
 
 import android.app.ActionBar.LayoutParams
 import android.content.Context
+import android.icu.text.DateIntervalFormat.FormattedDateInterval
 import android.media.VolumeShaper
 import android.media.VolumeShaper.Operation
 import android.os.Bundle
@@ -34,7 +35,7 @@ import com.example.apuntesclase.ui.theme.ApuntesClaseTheme
 import java.util.Scanner
 
 class MainActivity : ComponentActivity() {
-
+    /* CALCULADORA PT 1
     /* Colors
     enum class Colors(val text: String, val number: Int, val color: Color) {
         Red("Rojo", 0, Color(225, 0,0)),
@@ -159,6 +160,9 @@ class MainActivity : ComponentActivity() {
 
     val result: TextView by lazy { findViewById(R.id.startScreen_Result) }
     val buttonsContainer: LinearLayout by lazy { findViewById(R.id.startScreen_ButtonsContainer) }
+*/
+
+    val openAppText: TextView by lazy { findViewById(R.id.open_app_text) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -280,6 +284,7 @@ class MainActivity : ComponentActivity() {
         }*/
         setContentView(R.layout.start_screen)
 
+        /* CALCULADORA PT 2
         // Color por codigo
         buttonsContainer.setBackgroundColor(resources.getColor(R.color.newColor))
 
@@ -362,7 +367,8 @@ class MainActivity : ComponentActivity() {
 
             }
         }
-    }
+    }*/
+        /* CALCULADORA PT 3
     fun NumberPress(num: Int) {
         if(Op == null) {
             A?.let { a ->
@@ -435,3 +441,33 @@ fun PrintOnScreen(name: String, modifier: Modifier = Modifier) {
         //color = color.WithAlpha(1.0f)
     )
 }*/
+*/
+
+
+        /*val shared = this.getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE)
+
+        var timesOpenApp = shared.getInt("AppOpenTimes", 0)
+
+        timesOpenApp++
+
+        openAppText.text = timesOpenApp.toString()
+
+        val editor = shared.edit()
+
+        editor.putInt("AppOpenTimes", timesOpenApp)
+        editor.apply()*/
+
+        //openAppText.text = SharedPreferencesManager.Test().toString()
+
+        //openAppText.text = SharedPreferencesManager.TimesOpenApp.toString()
+
+
+
+        //SharedPreferencesManager.TimesOpenApp++
+        //openAppText.text = SharedPreferencesManager.TimesOpenApp.toString()
+
+        Shared.TimesOpenApp++
+        openAppText.text = Shared.TimesOpenApp.toString()
+
+    }
+}
