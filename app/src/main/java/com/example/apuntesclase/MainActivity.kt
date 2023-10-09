@@ -2,6 +2,8 @@ package com.example.apuntesclase
 
 import android.app.ActionBar.LayoutParams
 import android.content.Context
+import android.media.VolumeShaper
+import android.media.VolumeShaper.Operation
 import android.os.Bundle
 import android.os.CpuUsageInfo
 import android.util.Log
@@ -22,11 +24,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.app.NavUtils
 import com.example.apuntesclase.ui.theme.ApuntesClaseTheme
+import java.util.Scanner
 
 class MainActivity : ComponentActivity() {
 
@@ -82,6 +87,24 @@ class MainActivity : ComponentActivity() {
 
         }
     }*/
+
+
+    // Funcionamiento Interno Calculaora
+    enum class Operation(val operation: (a: Int, b: Int) -> Int, var char: String) {
+        Add({a, b -> a + b}, "+"),
+        Sub({a, b -> a - b}, "-"),
+        Mul({a, b -> a * b}, "*"),
+        Div({a, b -> a / b}, "/");
+
+        fun Operate(a: Int, b: Int) : Int {
+            return this.operation(a, b)
+        }
+    }
+
+    var A: Int? = null;
+    var B: Int? = null;
+    var Op: Operation? = null;
+
 
     /*UI*/
     class ButtonsRow(var linearLayout: LinearLayout, val context: Context) {
@@ -257,6 +280,14 @@ class MainActivity : ComponentActivity() {
         }*/
         setContentView(R.layout.start_screen)
 
+        // Color por codigo
+        buttonsContainer.setBackgroundColor(resources.getColor(R.color.newColor))
+
+        // Texto por codigo
+        result.text = getString(R.string.random_text)
+
+        // Padding por codigo
+        val lowPadding = resources.getDimension(R.dimen.padding_low)
         /*val bt = Button(this)
         bt.text = "Botón creado por código"
         bt.layoutParams = LinearLayout.LayoutParams(
@@ -277,26 +308,89 @@ class MainActivity : ComponentActivity() {
 
         var names: MutableList<MutableList<String>> = mutableListOf()
         names.add(mutableListOf("AC", "( )", "%", "/"))
-        names.add(mutableListOf("7", "8", "9", "x"))
+        names.add(mutableListOf("7", "8", "9", "*"))
         names.add(mutableListOf("4", "5", "6", "-"))
         names.add(mutableListOf("1", "2", "3", "+"))
         names.add(mutableListOf("0", ".", "DEL", "="))
 
-        for (y in names.indices) {
+        for (y in names.indices) { // FILAS
+
             btGrid.AddNewRow()
+
             var row: ButtonsRow? = btGrid.GetRow(y)
 
-            for (x in names[y].indices) {
-                row?.AddButtonToRow(names[y][x])?.setOnClickListener{
+            for (x in names[y].indices) { // COLUMNAS
+                row?.AddButtonToRow(names[y][x])?.setOnClickListener {
+
                     when(names[y][x]) {
+
+                        "AC" -> {
+                            A = null
+                            B = null
+                            Op = null
+                            result.text = ""
+                        }
+
+                        "1","2","3","4","5","6","7","8","9","0" -> {
+                            NumberPress(names[y][x].toInt())
+                        }
+
+                        "+" -> { OperationPress(Operation.Add) }
+
+                        "-" -> { OperationPress(Operation.Sub) }
+
+                        "*" -> { OperationPress(Operation.Mul) }
+
+                        "/" -> { OperationPress(Operation.Div) }
+
+                        "=" -> {
+                            A?.let { a ->
+                                B?.let { b ->
+                                    val resultNum = Op?.Operate(a, b)
+                                    result.text = resultNum.toString()
+                                    A = resultNum
+                                    B = null
+                                    Op = null
+                                }
+                            }
+                        }
+
                         else -> result.text = names[y][x]
                     }
+
                 }
+
+            }
+        }
+    }
+    fun NumberPress(num: Int) {
+        if(Op == null) {
+            A?.let { a ->
+                A = (a * 10) + num
+            } ?: run {
+                A = num
             }
 
+            result.text = A.toString()
         }
+        else {
+            B?.let { b ->
+                B = (b * 10) + num
+            } ?: run {
+                B = num
+            }
 
+            result.text = A.toString() + Op?.char + B.toString()
+        }
     }
+
+    fun OperationPress(op: Operation) {
+        if(A != null && B == null) {
+            Op = op
+            result.text = A.toString() + Op?.char
+        }
+    }
+
 }
     fun resetTextAndCounter() {
 

@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">ApuntesClase</string>
+    <string name="app_name" translatable="false">ApuntesClase</string>
+    <string name="hello_world">Hello World</string>
+    <string name="random_text" translatable="false">Random Text</string>
 </resources>
