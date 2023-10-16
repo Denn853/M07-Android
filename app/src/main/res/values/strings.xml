@@ -2,4 +2,5 @@
     <string name="app_name" translatable="false">ApuntesClase</string>
     <string name="hello_world">Hello World</string>
     <string name="random_text" translatable="false">Random Text</string>
+    <string name="bt_change_screen">Click me to change screen</string>
 </resources>
