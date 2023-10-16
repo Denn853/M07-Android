@@ -6,12 +6,10 @@
     android:gravity="center"
     android:background="@color/primary"
     >
-    
-    <Button
-        android:id="@+id/bt_changeScreen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/bt_change_screen"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/my_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         />
 
 </LinearLayout>
