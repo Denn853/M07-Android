@@ -66,4 +66,12 @@ dependencies {
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
+
+    //Librerias para llamadas a API(Internet)
+    //Las corrutinas para no trabajar en el hilo principal
+    //Y una libreria que nos permite trabajar con JSON de forma comoda (y casi magica)
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0' //Esta es la de las llamada a API
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0' //Esta es la de trabajar con JSONS
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3' //Esta es la de no trabajar en el hilo principal
+
 }
