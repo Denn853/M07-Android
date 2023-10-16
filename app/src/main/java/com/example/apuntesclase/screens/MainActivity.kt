@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
 
             var builder = AlertDialog.Builder(this)
             builder.setTitle("Titulo molon del Dialogo")
-            builder.setMessage("Mensaje todavia mas molon del Dialogo")
+            //builder.setMessage("Mensaje todavia mas molon del Dialogo")
 
             builder.setPositiveButton("Aceptar") { dialog, witch ->
                 dialog.dismiss()
@@ -33,12 +33,19 @@ class MainActivity : ComponentActivity() {
                 toast.show()
             }
 
-            builder.setNegativeButton("Soy EMO :(") { dialog, witch ->
+            builder.setNegativeButton("Soy EMO :(") { dialog, whitch ->
                 dialog.dismiss()
             }
 
-            builder.setNeutralButton("Soy Neutral") { dialog, witch ->
+            builder.setNeutralButton("Soy Neutral") { dialog, whitch ->
                 dialog.dismiss()
+            }
+
+            val options = arrayOf("Respuesta 1", "Respuesta 2", "Respuesta 3", "Respuesta 4")
+            val selectedResponses = booleanArrayOf(false, false, false, false)
+
+            builder.setMultiChoiceItems(options, selectedResponses) { dialog, whitch, isChecked ->
+                selectedResponses[whitch] = isChecked
             }
 
             val dialog = builder.create()
