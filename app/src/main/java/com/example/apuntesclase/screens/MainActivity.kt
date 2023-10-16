@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import com.example.apuntesclase.R
@@ -44,9 +45,13 @@ class MainActivity : ComponentActivity() {
             val options = arrayOf("Respuesta 1", "Respuesta 2", "Respuesta 3", "Respuesta 4")
             val selectedResponses = booleanArrayOf(false, false, false, false)
 
-            builder.setMultiChoiceItems(options, selectedResponses) { dialog, whitch, isChecked ->
+            /*builder.setMultiChoiceItems(options, selectedResponses) { dialog, whitch, isChecked ->
                 selectedResponses[whitch] = isChecked
-            }
+            }*/
+
+            val input = EditText(this)
+            input.hint = "Escribe Aquí"
+            builder.setView(input)
 
             val dialog = builder.create()
             dialog.show()
