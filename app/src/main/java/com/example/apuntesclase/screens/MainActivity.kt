@@ -3,6 +3,7 @@ package com.example.apuntesclase.screens
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import com.example.apuntesclase.R
 
@@ -15,11 +16,13 @@ class MainActivity : ComponentActivity() {
         setContentView(R.layout.start_screen)
 
         btChangeScreen.setOnClickListener {
-            val newIntent = Intent(this, SecondScreen::class.java)
-            newIntent.putExtra(SecondScreen.ExtraTextKey, "Cadena de texto transferida")
 
-            this.startActivity(newIntent)
-            overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left)
+            val toast = Toast(this)
+            toast.duration = Toast.LENGTH_LONG
+            toast.setText("Soy un toast muy molon")
+
+            toast.show()
+
         }
     }
 }
