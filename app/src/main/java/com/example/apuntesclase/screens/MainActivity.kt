@@ -1,5 +1,6 @@
 package com.example.apuntesclase.screens
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -17,11 +18,31 @@ class MainActivity : ComponentActivity() {
 
         btChangeScreen.setOnClickListener {
 
-            val toast = Toast(this)
-            toast.duration = Toast.LENGTH_LONG
-            toast.setText("Soy un toast muy molon")
+            var builder = AlertDialog.Builder(this)
+            builder.setTitle("Titulo molon del Dialogo")
+            builder.setMessage("Mensaje todavia mas molon del Dialogo")
 
-            toast.show()
+            builder.setPositiveButton("Aceptar") { dialog, witch ->
+                dialog.dismiss()
+            }
+
+            //builder.setCancelable(false) //para que si le da fuera del cuadrado NO se cierre
+            builder.setOnCancelListener {
+                val toast = Toast(this)
+                toast.setText("Cancel Dialog")
+                toast.show()
+            }
+
+            builder.setNegativeButton("Soy EMO :(") { dialog, witch ->
+                dialog.dismiss()
+            }
+
+            builder.setNeutralButton("Soy Neutral") { dialog, witch ->
+                dialog.dismiss()
+            }
+
+            val dialog = builder.create()
+            dialog.show()
 
         }
     }
