@@ -43,7 +43,8 @@ class MainActivity : ComponentActivity() {
 
         CoroutineScope(Dispatchers.IO).launch {
 
-            val heroRepository = HeroSharedDatabase() //Nuevo Repo
+            val heroRepository = HeroMockRepository() //Repo antiguo
+            //val heroRepository = HeroSharedDatabase() //Nuevo Repo
             val provider = HeroProvider(heroRepository)
             val heroList = provider.GetHeroes()
             val adapter = HeroAdapter(heroList)
