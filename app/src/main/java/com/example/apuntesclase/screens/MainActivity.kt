@@ -8,6 +8,7 @@ import com.example.apuntesclase.R
 import com.example.apuntesclase.heros.HeroAdapter
 import com.example.apuntesclase.heros.HeroData
 import com.example.apuntesclase.heros.HeroProvider
+import com.example.apuntesclase.heros.repositories.HeroApiService
 import com.example.apuntesclase.heros.repositories.HeroMockRepository
 import com.example.apuntesclase.heros.repositories.HeroSharedDatabase
 import com.example.apuntesclase.utils.Shared
@@ -43,10 +44,11 @@ class MainActivity : ComponentActivity() {
 
         CoroutineScope(Dispatchers.IO).launch {
 
-            val heroRepository = HeroMockRepository() //Repo antiguo
+            //val heroRepository = HeroMockRepository() //Repo antiguo
             //val heroRepository = HeroSharedDatabase() //Nuevo Repo
+            val heroRepository = HeroApiService() //Nuevo Repo ara si
             val provider = HeroProvider(heroRepository)
-            val heroList = provider.GetHeroes()
+            val heroList = provider.GetHeroes(0, 20)
             val adapter = HeroAdapter(heroList)
 
             CoroutineScope(Dispatchers.Main).launch {
