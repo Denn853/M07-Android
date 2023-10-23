@@ -24,37 +24,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.start_screen)
 
-        InitHeroRecyclerView()
-        }
-
-    fun InitHeroRecyclerView() {
         heroRecyclerView.layoutManager = LinearLayoutManager(this)
+        heroRecyclerView.adapter = HeroAdapter(HeroApiService())
 
-        val tempList = mutableListOf(
-            HeroData("Test Hero1", "Desc"),
-            HeroData("Test Hero2", "Desc"),
-            HeroData("Test Hero3", "Desc"),
-            HeroData("Test Hero4", "Desc"),
-        )
-        Shared.Heroes = tempList
-        //Obtenemos la lista de heroes de las preferencias
-        //Añadimos un nuevo heroe
-        //Actualizamos la lista
-
-
-        CoroutineScope(Dispatchers.IO).launch {
-
-            //val heroRepository = HeroMockRepository() //Repo antiguo
-            //val heroRepository = HeroSharedDatabase() //Nuevo Repo
-            val heroRepository = HeroApiService() //Nuevo Repo ara si
-            val provider = HeroProvider(heroRepository)
-            val heroList = provider.GetHeroes(0, 20)
-            val adapter = HeroAdapter(heroList)
-
-            CoroutineScope(Dispatchers.Main).launch {
-                heroRecyclerView.adapter = adapter
-            }
-
-        }
     }
 }
