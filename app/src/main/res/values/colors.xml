@@ -10,4 +10,5 @@
     <color name="primary">#9D57FF</color>
     <color name="secondary">#62FC95</color>
     <color name="newColor">#FF9FFA</color>
+    <color name="nav_bar">#900EE0</color>
 </resources>

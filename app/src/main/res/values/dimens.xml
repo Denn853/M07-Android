@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="padding_low">24dp</dimen>
+    <dimen name="padding_mid">48dp</dimen>
     <dimen name="bt_size_medium">48dp</dimen>
     <dimen name="text_title">48dp</dimen>
     <dimen name="text_normal">24dp</dimen>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/nav_bar"
+        android:padding="@dimen/padding_low"
+        >
+
+        <ImageButton
+            android:id="@+id/hero_detail_back_arrow"
+            android:layout_width="@dimen/bt_size_medium"
+            android:layout_height="@dimen/bt_size_medium"
+            android:background="@drawable/back_arrow"
+            />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            />
+
+        <ImageButton
+            android:id="@+id/hero_detail_delete"
+            android:layout_width="@dimen/bt_size_medium"
+            android:layout_height="@dimen/bt_size_medium"
+            android:background="@drawable/delete_bt"
+
+            />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_low"
+            >
+
+            <TextView
+                android:id="@+id/hero_detail_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text = "Hero Name"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_title"
+                />
+
+            <TextView
+                android:id="@+id/hero_detail_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text = "Hero Description"
+                android:textSize="@dimen/text_normal"
+                android:layout_margin="@dimen/text_normal"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
